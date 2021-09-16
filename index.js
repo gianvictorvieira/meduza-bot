@@ -75,13 +75,13 @@ client.on('message', async(msg) => {
     if(ytdl.validateURL(oQueTocar)){
         servidores.server.fila.push(oQueTocar); 
         console.log('Adicionado ' + oQueTocar);
-
+        tocaMusicas();
         }
         else{
              youtube.search.list({
                 q: oQueTocar,
                 part: 'snippet',
-                fields: 'items(id(videoId), snippet(tittle))',
+                fields: 'items(id(videoId), snippet(title))',
                 type: 'video'
             },
         function(err, resultado) {
@@ -89,14 +89,15 @@ client.on('message', async(msg) => {
                 console.log(err)
             }
             if(resultado){
-              const id = resultado.data.items[0].id.videoId
-              oQueTocar ='https://www.youtube.com/watch?v=' + id;
+              const id = resultado.data.items[0].id.videoId;
+              oQueTocar = 'https://www.youtube.com/watch?v=' + id;
               servidores.server.fila.push(oQueTocar);
               console.log('Adicionado ' + oQueTocar);
-
+              tocaMusicas();
             }
+         
         });
-     }tocaMusicas();
+     }
     }
     
     if(msg.content === prefixo + 'pause'){ //!pause
@@ -104,6 +105,10 @@ client.on('message', async(msg) => {
     }
     if(msg.content === prefixo + 'resume'){ //!resume
         servidores.server.dispatcher.resume(); 
+    }
+    if(msg.content === prefixo + 'skip'){
+        servidores.server.dispatcher.end(); //esse comando termina a musica q esta passando
+        tocaMusicas(); //Minha função para tocar as musicas
     }
 });
 const tocaMusicas = () => {
