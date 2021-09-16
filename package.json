@@ -1,0 +1,19 @@
+{
+  "name": "MeduzaBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "meduza.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
+    "discord.js": "^12.5.1",
+    "ffmpeg-static": "^4.4.0",
+    "googleapis": "^86.1.0",
+    "ytdl-core": "^4.9.1"
+  }
+}
